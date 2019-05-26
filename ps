@@ -1,0 +1,268 @@
+const express=require('express');
+const hbs = require('hbs');
+const bodyParser=require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var morgan = require('morgan');
+
+var {mongoose} = require('./database/database.js');
+var {Users} = require('./database/models/users.js');
+var {Facualtys} = require('./database/models/facualty.js');
+var {Admins} = require('./database/models/admin.js');
+
+
+var app=express();
+
+hbs.registerPartials(__dirname+'/views/partials');
+app.set('view engine', 'html');
+app.engine('html', require('hbs').__express);
+app.use(express.static(__dirname));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+app.use(cookieParser());
+
+app.use(session({
+    key: 'user_sid',
+    secret: 'somerandonstuffs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
+
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');
+    }
+    next();
+});
+
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+      if(req.session.user.subject){
+          res.redirect('/facualtyhome');
+        }
+        else if(req.session.user.subject){
+            res.redirect('/userhome');
+        }
+        else{
+          res.redirect('/adminhome');
+        }
+
+    }else {
+        next();
+    }
+};
+
+app.get('/',sessionChecker, (req, res) =>{
+  res.render('sunilfile.html');
+});
+app.get('/userhome',(req, res) =>{
+  if (req.session.user && req.cookies.user_sid) {
+    if(req.session.user.subject){
+        res.redirect('/facualtyhome');
+      }
+      else if(req.session.user.subject){
+          res.render('userhome');
+      }
+      else{
+        res.redirect('/adminhome');
+      }
+    } else {
+        res.redirect('/');
+    }
+});
+app.get('/facualtyhome',(req, res) =>{
+  if (req.session.user && req.cookies.user_sid) {
+    if(req.session.user.subject){
+        res.render('facualtyhome');
+      }
+      else if(req.session.user.subject){
+          res.redirect('/userhome');
+      }
+      else{
+        res.redirect('/adminhome');
+      }
+    } else {
+        res.redirect('/');
+    }
+});
+app.get('/adminhome',(req, res) =>{
+  if (req.session.user && req.cookies.user_sid) {
+    if(req.session.user.subject){
+        res.redirect('/facualtyhome');
+      }
+      else if(req.session.user.subject){
+          res.redirect('/userhome');
+      }
+      else{
+        res.render('adminhome');
+      }
+    } else {
+        res.redirect('/');
+    }
+});
+
+//student signup
+app.post('/signup', (req, res) => {
+var user = new Users({
+  fname: req.body.fname,
+  lname: req.body.lname,
+  college: req.body.college,
+  email: req.body.email,
+  password: req.body.password
+});
+user.save().then((doc) => {
+   req.session.user = user;
+  res.redirect('userhome');
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+//facualty signup
+app.post('/fsignup', (req, res) => {
+var facualty = new Facualtys({
+  fname: req.body.fname,
+  lname: req.body.lname,
+  college: req.body.college,
+  subject: req.body.subject,
+  email: req.body.email,
+  password: req.body.password
+});
+facualty.save().then((doc) => {
+   req.session.user = facualty;
+  res.redirect('facualtyhome');
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+
+//user login
+app.post('/login', (req, res) => {
+var user = new Users({
+  email: req.body.email,
+  password: req.body.password
+});
+Users.findOne({email:user.email})
+ .then((doc)=>{
+   if(!doc){
+     res.send("no such user");
+   }
+   else{
+    if(doc.password==user.password){
+      console.log("LOGIN SUCCESSFULL");
+    req.session.user = doc;
+    console.log(req.session.user);
+      res.redirect('userhome');
+    }
+    else{
+    //  res.send("WRONG PASSWORD");
+    res.redirect('/');
+    }
+  }
+ })
+.catch((err)=>{
+    console.log(err);
+});
+});
+
+//facualty LOGIN
+app.post('/flogin', (req, res) => {
+var facualty = new Facualtys({
+  email: req.body.email,
+  password: req.body.password
+});
+Facualtys.findOne({email:facualty.email})
+ .then((doc)=>{
+   if(!doc){
+     res.send("no such user");
+   }
+   else{
+    if(doc.password==facualty.password){
+      console.log("LOGIN SUCCESSFULL");
+    req.session.user = doc;
+    console.log(req.session.user);
+      res.redirect('facualtyhome');
+    }
+    else{
+    //  res.send("WRONG PASSWORD");
+    res.redirect('/');
+    }
+  }
+ })
+.catch((err)=>{
+    console.log(err);
+});
+});
+
+//admin login
+app.post('/alogin', (req, res) => {
+var admin = new Admins({
+  email: req.body.email,
+  password: req.body.password
+});
+Admins.findOne({email:admin.email})
+ .then((doc)=>{
+   if(!doc){
+     res.send( "no such user");
+   }
+   else{
+    if(doc.password==admin.password){
+      console.log("LOGIN SUCCESSFULL");
+    req.session.user = doc;
+    console.log(req.session.user);
+      res.redirect('adminhome');
+    }
+    else{
+    //res.send("WRONG PASSWORD");
+    res.redirect('/');
+    }
+  }
+ })
+.catch((err)=>{
+    console.log(err);
+});
+});
+
+
+//logout
+app.get('/logout', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.clearCookie('user_sid');
+        res.redirect('/');
+    } else {
+        res.redirect('/');
+    }
+});
+
+
+app.get('/users', (req, res) =>{
+  Users.find().then((users) =>{
+    res.send({
+      users:users
+    });
+  }, (e) =>{
+    res.status(400).send(e);
+  });
+});
+app.listen(3000, () => {
+  console.log("Server running succesfully");
+});
+
+
+
+<!-- <div class="mainbody">
+  {{#each docs}}
+  <div class="">
+    {{this.name}}
+    {{#each this.userdetails}}
+    <div class="">
+      {{this.email}}  {{this.score}}
+    </div>
+
+    {{/each}}
+  </div>
+  {{/each}}
+</div> -->

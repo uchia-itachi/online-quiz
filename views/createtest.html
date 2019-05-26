@@ -1,0 +1,235 @@
+
+<html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/css/header.css">
+
+
+    </head>
+    <style>
+        body
+        {
+            margin:0;
+        }
+        .main{
+          width: 1014px;
+          margin: auto;
+          top: 60px;
+          position: relative;
+        }
+        #form1{
+          width: 500px;
+          height: 501px;
+          float: right;
+          box-shadow: 0px 0px 10px #c1b4b4;
+          box-sizing: border-box;
+          padding: 20px;
+          overflow-y: scroll;
+        }
+        #form1::-webkit-scrollbar{
+          width: .5px;
+        }
+        #create
+        {
+            height:100%;
+            width:30%;
+            float:right;
+            /* background-color : green; */
+        }
+        .quizdetails{
+          width: 500px;
+          height: 501px;
+          float:left;
+          box-shadow: 0px 0px 10px #c1b4b4;
+          box-sizing: border-box;
+          padding: 20px;
+          margin-right: 13px;
+        }
+        .note{
+          text-align: center;
+          position: relative;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          font-size: 20px;
+        }
+        .note1{
+          text-align: center;
+          position: relative;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+          font-size: 20px;
+        }
+        .question-container
+        {
+            width: 80%;
+            height: auto;
+            margin: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 20px;
+            background-color: white;
+        }
+        .input-elements
+        {
+            display: block;
+            width: 80%;
+            height : 30px;
+            margin: auto;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+        .input-question
+        {
+            display: block;
+            height : 40px;
+            margin: auto;
+            margin-bottom: 17px;
+            margin-top: 15px;
+        }
+        label{
+          margin: 9px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .input-quiz
+        {
+          width: 98%;
+          padding: 9px;
+          margin: 9px;
+          box-sizing: border-box;
+          border: 1px solid #e6e6e6;
+          background-color: #fbfbfb;
+        }
+        .buttonstyle
+        {
+          border: 1px solid #dedede;
+          padding: 8px 15px;
+          background-color: #ffffff;
+          border-radius: 5px;
+          float:right;
+        }
+
+    </style>
+    <body>
+      {{> header}}
+      <!-- create quiz -->
+    <div class="main">
+      <div id="quizdetails"  class="quizdetails">
+        <div class="note1" style="display:none"><span>Add Questions</span></div>
+        <form>
+          <h1>Quiz Details</h1>
+            <label>Quizz Name: </label><input type="text" name="quizname" class="input-quiz" id="name">
+            <label>Quizz Type: </label>
+            <select class="input-quiz" name="quiztype" id="type">
+              <option value="Competative">Competative</option>
+              <option value="Practise">Practise</option>
+              <option value="Private">Private</option>
+            </select>
+            <label style="display:none;" id="quizblock">Quiz Code:</label><input type="text" name="quizcode" class="input-quiz" value="" id="quizcode" style="display:none;">
+            <label>College Name:</label> <input type="text" name="collegename" class="input-quiz" value={{{collegename}}} readonly id="collegename" >
+            <label>Subject Name: </label> <input type="text" name="subjectname" class="input-quiz" value={{{subjectname}}} readonly id="subjectname">
+            <div style="padding: 10px 0px;"><button id = "submit2" class="buttonstyle">Create Quiz</button></div>
+      </form>
+      </div>
+
+      <div id="form1" >
+            <div class="note"><span>Enter Quiz name To add Questions</span></div>
+        <div id = "questions" style="display:none;">
+          <h1 style="line-height:0;">Enter Questions</h1>
+          <label>Question:</label><input type="text" name="question" class="input-quiz" id="question">
+          <label>1:</label><input type="text" name="option1" class="input-quiz" id="option1">
+          <label>2:</label><input type="text" name="option2" class="input-quiz" id="option2">
+          <label>3:</label><input type="text" name="option3" class="input-quiz" id="option3">
+          <label>4:</label><input type="text" name="option4" class="input-quiz" id="option4">
+          <label>CANS:</label><input type="text" name="correctoption" class="input-quiz" id="cans">
+          <button type="button" id="addquestion" class="buttonstyle">Add Question</button>
+
+        </div>
+      </div>
+    </div>
+    </body>
+
+    <script>
+    	$(document).ready(function(){
+    		$("#submit2").click(function(e){
+    	    		e.preventDefault();
+    	                        var name =$("#name").val();
+    	                        var type=$("#type").val();
+                              var quizcode=$("#quizcode").val();
+                              var collegename=$("#collegename").val();
+                              var subjectname=$("#subjectname").val();
+                              var question=$("#question").val();
+                              var option1=$("#option1").val();
+                              var option2=$("#option2").val();
+                              var option3=$("#option3").val();
+                              var option4=$("#option4").val();
+                              var cans=$("#cans").val();
+    	                        console.log(name+type+collegename+subjectname+question+option1);
+    	                        $.ajax({
+    	                            type: "POST",
+    	                            url: "cq",
+    	                            data: "name="+name+"&type="+type+"&quizcode="+quizcode+"&collegename="+collegename+"&subjectname="+subjectname,
+    	                            success: function (msg) {
+    	                                    alert(msg);
+
+                                          document.getElementById("questions").style.display="block";
+                                          $('.note').hide();
+                                          $('.note1').show();
+                                          $('.quizdetails form').hide();
+    	  	                    },
+    	                            error: function (error) {
+                                    console.log(error);
+    	                                alert("Error!!");
+    	                            }
+    	                        });
+
+    	        });
+              $("#addquestion").click(function(e){
+          	    		e.preventDefault();
+          	                        var name =$("#name").val();
+          	                        var type=$("#type").val();
+                                    var quizcode=$("#quizcode").val();
+                                    var collegename=$("#collegename").val();
+                                    var subjectname=$("#subjectname").val();
+                                    var question=$("#question").val();
+                                    var option1=$("#option1").val();
+                                    var option2=$("#option2").val();
+                                    var option3=$("#option3").val();
+                                    var option4=$("#option4").val();
+                                    var cans=$("#cans").val();
+          	                        console.log(name+type+collegename+subjectname+question+option1);
+          	                        $.ajax({
+          	                            type: "POST",
+          	                            url: "createquestion",
+          	                            data: "name="+name+"&type="+type+"&quizcode="+quizcode+"&collegename="+collegename+"&subjectname="+subjectname+"&question="+question+"&option1="+option1+"&option2="+option2+"&option3="+option3+"&option4="+option4+"&cans="+cans,
+          	                            success: function (msg) {
+          	                                    alert(msg);
+                                                document.getElementById("quizdetails").style.display="none";
+                                                document.getElementById("questions").style.display="block";
+
+          	  	                    },
+          	                            error: function (error) {
+                                          console.log(error);
+          	                                alert("Error!!");
+          	                            }
+          	                        });
+
+          	        });
+    	});
+
+document.getElementById('type').addEventListener('input', function () {
+   var input=$("#type").val();;
+   console.log(input);
+   if(input=='Private'){
+    document.getElementById('quizcode').style.display="block";
+    document.getElementById('quizblock').style.display="block";
+   }
+   else{
+       document.getElementById('quizcode').style.display="none";
+       document.getElementById('quizblock').style.display="none";
+   }
+});
+    </script>
+</html>

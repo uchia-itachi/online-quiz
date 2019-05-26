@@ -1,0 +1,2 @@
+* url encoder is encoding normal inputs too on some pages.
+* need to save score, users, and questions on same schema, makes CRUD easier.

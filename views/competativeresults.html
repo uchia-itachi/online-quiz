@@ -1,0 +1,42 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <style >
+    table, th, td{
+      border: 1px solid grey;
+      border-collapse: collapse;
+    }
+  </style>
+  <body>
+    {{> header}}
+
+    <div class="container">
+              {{#each docs}}
+              <caption>Test : {{this.name}}</caption>
+    					<table class="table table-hover">
+    						<thead>
+    							<tr class="table100-head">
+    								<th class="column1">Users</th>
+    								<th class="column2">Score</th>
+    							</tr>
+    						</thead>
+    						<tbody>
+                  {{#each this.userdetails}}
+    								<tr>
+    									<td class="column1">{{this.email}}</td>
+    									<td class="column2">{{this.score}}</td>
+    								</tr>
+                    {{/each}}
+    						</tbody>
+    					</table>
+              {{/each}}
+    </div>
+  </body>
+</html>

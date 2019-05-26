@@ -1,0 +1,57 @@
+.main{
+    width: 85%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+.sidebar{
+    width: 30%;
+    float: left;
+    border: 1px solid #d0cccc;
+    padding: 20px;
+}
+.profilebar{
+  float: right;
+  width: 60%;
+}
+.profilepic{
+   text-align: center;
+   width: 100%;
+}
+.profilepic img{
+    height: 200px;
+    border-radius: 50%;
+    width: 200px;
+}
+.profilepic span{
+  background-color: #e4e6e7;
+  padding: 9px;
+}
+table{
+    width: 100%;
+    height: 28%;
+    border: 1px solid #e4e6e7;
+    padding: 10px;
+}
+.pdetails{
+  font-size: x-large;
+  margin-top:5%;
+  margin-left:5%;
+  margin-right: 2%;
+  border-bottom:1px solid black;
+}
+.a{
+  text-align: center;
+  margin: 10px;
+  padding: 2px;
+}
+label {
+   cursor: pointer;
+}
+
+#upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+   color: grey;
+}

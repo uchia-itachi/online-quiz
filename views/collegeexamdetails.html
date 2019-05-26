@@ -1,0 +1,141 @@
+<html lang="en" dir="ltr">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+
+    <style>
+        body
+        {
+            margin:0;
+            font-family: monospace;
+        }
+        .main{
+          width: 500px;
+          margin: 20px auto;
+          box-shadow: 0px 0px 10px #dedede;
+          box-sizing: border-box;
+          padding: 20px;
+        }
+        #questions
+        {
+            height:100%;
+            width:70%;
+            float:left;
+            background-color :#adafb8;
+            overflow : auto;
+        }
+        #create
+        {
+            height:100%;
+            width:30%;
+            float:right;
+            /* background-color : green; */
+        }
+        .question-container
+        {
+            width: 80%;
+            height: auto;
+            margin: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 20px;
+            background-color: white;
+        }
+        .input-elements
+        {
+            display: block;
+            width: 80%;
+            height : 30px;
+            margin: auto;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+        .input-question
+        {
+            display: block;
+            width: 80%;
+            height : 40px;
+            margin: auto;
+            margin-bottom: 17px;
+            margin-top: 15px;
+        }
+        .input-quiz
+        {
+          width: 96%;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 4px;
+          border: 1px solid #e6e6e6;
+          background-color: #fbfbfb;
+        }
+        .buttonstyle
+        {
+          width: 20%;
+          border: 1px solid #dedede;
+          padding: 8px 15px;
+          background-color: #ffffff;
+          border-radius: 5px;
+        }
+        label{
+          padding: 13px 13px 9px 13px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+    </style>
+  </head>
+  <body>
+    {{> userheader}}
+    <div class="main">
+        <h1>Enter QuizCode</h1>
+        <form id='myForm' method="post" action="/usercollegequiz">
+              <label>Name:</label>
+              <input type="text" name="name" value="{{username}}" class="input-quiz" readonly id="name" placeholder="Name">
+              <label>QuizName:</label>
+              <input type="text" name="quizname" value="{{quizname}}" class="input-quiz" readonly id="quizname" placeholder="Quiz Name">
+              <label>Email:</label>
+              <input type="text" name="email" class="input-quiz" value="{{email}}" id="email"  value="{{email}}" readonly placeholder="email">
+              <label>College Name:</label>
+              <input type="text" name="collegename" class="input-quiz" value="{{college}}" readonly id="collegename" >
+              <label>Subject Name:</label>
+              <input type="text" name="subjectname" class="input-quiz" value="{{subject}}" readonly id="subjectname">
+              <label>Quiz Code:</label>
+              <input type="text" name="quizcode" class="input-quiz" id="quizcode" placeholder="Quiz Code">
+              <button id = "submit2" class="buttonstyle" style = "margin-left:10px;">Submit</button>
+              <a href="/userhomecollege"><button class = "buttonstyle" style = "margin-right:10px;float:right;">GO back</button></a>
+        </form>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function(){
+      $("#submit2").click(function(e){
+            e.preventDefault();
+                            var name= $("#name").val();
+                            var quizname =$("#quizname").val();
+                            var quizcode=$("#quizcode").val();
+                            var collegename=$("#collegename").val();
+                            var subjectname=$("#subjectname").val();
+                            var email=$("#email").val();
+                            $.ajax({
+                                type: "POST",
+                                url: "usercollegequiz",
+                                data: "name="+name+"&quizname="+quizname+"&quizcode="+quizcode+"&collegename="+collegename+"&subjectname="+subjectname+"&email="+email,
+                                success: function (msg) {
+                                  if(msg!='invalid Code')
+                                         document.getElementById("myForm").submit();
+                                         else {
+                                           alert("invalid Code");
+                                         }
+                            },
+                                error: function (error) {
+                                  console.log(error);
+                                    alert("Error!!");
+                                }
+                            });
+
+            });
+    });
+
+  </script>
+</html>

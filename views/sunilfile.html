@@ -1,0 +1,61 @@
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="/css/main.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body >
+        <div class = "header">
+            <span class="quizlogo"><a href="#">QUIZZ</a></span>
+            <span class="admin" onclick="adminpop()"><a href="#">For Admins</a></span>
+            <span class="faculty" onclick="facualtypop()"><a href="#">For Facultys</a></span>
+            <span class=login onclick="signpop()"><a href="#">For Students</a></span>
+        </div>
+        <div class = "main">
+                <div id="quizdetails">
+                  <span class="better">Be a better</span>
+                  <span class="student">Student</span>
+                  <span class="study">Study Practise Achieve</span>
+            </div>
+            <div id="popup">
+              <div id = "form-container">
+
+                <div id = "selector">
+                    <button id = "sign-up" onclick = "clickup()">SIGN UP</button>
+                    <button id = "sign-in" onclick = "clickin()">SIGN IN</button>
+                </div>
+
+                <div id = "form">
+                    <form  method="POST"  action="/signup" id = "sign-up-form">
+                        <center>
+                            <br><span style = "font-family:Segoe UI; color:#5f4145; font-size : 20px; padding-top:20px;">Create Your Account.</span>
+                        </center><br>
+                        <input type = "text" name="fname" placeholder = "First Name" class = "name" style="margin-left:10%" required>
+                        <input type = "text" name="lname" placeholder = "Last Name" class = "name" style="margin-left:3%" required><br><br>
+                        <select  name="college"  class = "select-elements"  required placeholder="collegename" style="color:black;">
+                          {{#each doc}}
+                          <option value="{{this.name}}" style="color:black;">{{{this.name}}}</option>
+                          {{/each}}
+                        </select><br><br>
+                        <div id="subject"><input type = "text" name="subject" placeholder = "Subject Name" class = "input-elements" ><br><br></div>
+                        <input type = "email" name="email" placeholder = "Email ID"  class="input-elements" required><br><br>
+                        <input type = "password" name="password" placeholder = "Password"  class="input-elements" required><br><br>
+                        <input type = "password" name="cpassword" placeholder = "Confirm Password"  class="input-elements" required><br><br>
+                        <input type="submit" value="Submit" id="Submit">
+                    </form>
+                    <form  method="POST"  action="/login" id = "sign-in-form">
+                      <center>
+                          <br><span style = "font-family:Segoe UI; color:#5f4145; font-size : 20px; padding-top:20px;">SIGN IN</span>
+                      </center><br>
+                      <input type = "text" name="email" placeholder = "Email ID"  class="input-elements" required><br><br>
+                      <input type = "password" name="password" placeholder = "Password"  class="input-elements" required><br><br>
+                      <button id = "submit">SIGN IN</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+      </div>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>

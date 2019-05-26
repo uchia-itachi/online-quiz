@@ -1,0 +1,33 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <style media="screen">
+      .divs{
+        height: 8%;
+        width: 70%;
+        margin-top:4%;
+        margin-left: 4%;
+        border: 1px solid black;
+        float: left;
+        /* text-align: center; */
+        padding: 10px;
+        background-color: #f5f5f5;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    {{> header}}
+  <a href="/colleges"><div class="divs">
+      Get Colleges List
+    </div></a>
+    <a href="/facualtylist"><div class="divs">
+      Get Facualties List
+    </div></a>
+    <a href="/userlist"><div class="divs">
+      Get Users List
+    </div></a>
+  </body>
+</html>

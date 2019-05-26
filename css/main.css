@@ -1,0 +1,213 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin:0%;
+ background-image: url("/images/homebg.jpg");
+background-repeat: repeat-x;
+font-family: monospace;
+}
+.header{
+  width:100%;
+  overflow: hidden;
+  background-color: #f9f2f2;
+}
+.main{
+  width:100%;
+  height:90%;
+  background-image: url("/images/homebg.jpg");
+  background-size: contain;
+  background-repeat:repeat-x;
+  overflow: hidden;
+}
+.quizlogo{
+  font-size: 22px;
+  font-weight: bold;
+  top: 17px;
+  letter-spacing: 5px;
+  padding: 17.5px 15px;
+  position: relative;
+}
+.header span:not(:first-child){
+  float: right;
+  padding: 22px 15px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.signup{
+margin-right: 4%;
+margin-top: 2%;
+float:right;
+}
+.header a
+{
+  text-decoration: none;
+  color: inherit;
+}
+#popup{
+  width:0%;
+  height: 100%;
+  float: right;
+
+}
+#quizdetails{
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+#form-container
+      {
+        margin: 3%;
+          width:90%;
+          height :85%;
+          border-radius : 2px;
+          box-shadow: 3px 3px 18px -3px #212020;
+          display: none;
+      }
+      #selector
+      {
+          width:100%;
+          height : 10%;
+          background-color : lightblue;
+      }
+      #sign-up
+      {
+          width:50%;
+          height:100%;
+          float : left;
+          border : 0.2px solid #cebebe;
+          border-right:none;
+
+          background-color:#eff4f7;
+          cursor : pointer;
+          letter-spacing : 1.5;
+          font-family:helvetica;
+          font-size : 15px;
+          color: gray;
+      }
+      #sign-up:hover
+      {
+          box-shadow: 3px 3px 18px -3px gray;
+          transition :0.4s ease;
+      }
+      #sign-in:hover
+      {
+          box-shadow: 3px 3px 18px -3px gray;
+          transition :0.4s ease;
+      }
+      #sign-in
+      {
+          width:50%;
+          height:100%;
+          float : right;
+          border :0.2px solid #cebebe;
+          background-color: white;
+          cursor : pointer;
+          border-bottom: none;
+          letter-spacing : 1.5;
+          font-family:helvetica;
+          font-size : 15px;
+          color: gray;
+       }
+      #form
+      {
+          border : 0.5px solid #bbadad;
+          border-top:none;
+          width:100%;
+          height:90%;
+      }
+      #sign-up-form
+      {
+          width:100%;
+          height:100%;
+          /* background-color : red; */
+          display : none;
+
+      }
+      #sign-in-form
+      {
+          width:100%;
+          height:100%;
+          /* background-color : blue; */
+          display : block;
+
+      }
+      .input-elements
+      {
+          border :0.2px solid #cebebe;
+          background-color:  transparent;
+          outline:none;
+          margin-left: 10%;
+          width: 80%;
+          height: 35px;
+          color: white;
+          opacity:1;
+          color:black;
+          padding:17px;
+      }
+      .select-elements{
+        border :0.2px solid #cebebe;
+        outline:none;
+        margin-left: 10%;
+        width: 80%;
+        height: 35px;
+        color:black;
+        padding:8px;
+      }
+      .name
+      {
+          border :0.2px solid #cebebe;
+          background-color:  transparent;
+          outline:none;
+          width: 38%;
+          height: 35px;
+          color: white;
+          opacity:1;
+          color:black;
+          padding:17px;
+      }
+      #submit
+      {
+          margin-left: 10%;
+          width: 80%;
+          height: 35px;
+          border-radius: 50px;
+          background-color: #6f9acec9;
+          border: 0.3px solid #6f9acec9;
+          color: white;
+          font-size: 15px;
+          font-family: segoe UI;
+          box-shadow: 1px 3px 12px -3px #828080;
+      }
+      #logo
+      {
+          width:70px;
+          height: 90%;
+      }
+      .better{
+    font-size: 30px;
+    position: relative;
+    text-align: left;
+      }
+.student{
+  font-size: 50px;
+  position: relative;
+  text-align: center;
+}
+.study{
+font-size: 30px;
+position: relative;
+text-align: right;
+}
+#quizdetails{
+  padding-top: 20px;
+}
+#quizdetails span{
+  display: inline-block;
+width: 100%;
+padding: 10px 420px;
+}
+#subject{
+display: none;
+}

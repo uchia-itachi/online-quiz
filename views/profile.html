@@ -1,0 +1,57 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/profilebody.css">
+  </head>
+  <body>
+    {{> header}}
+    <div class="main">
+      <div class="sidebar">
+          <div class="profilepic">
+            <img src="images/download.png"><br><br>
+            <form class="" action="/uploadpic" enctype="multipart/form-data" name="imgUploader" method="post">
+              <span><label for="upload-photo">Upload Profil Picture</span>
+              <input type="file" onchange="this.form.submit()" name="photo" id="upload-photo"  multiple/></center>
+            </form>
+          </div>
+
+        <div class="a"><center> {{fname}}&nbsp;{{lname}}</center></div>
+        <div class="a"><center>({{email}})<center></div>
+          {{#if college}}
+        <div class="a" ><center>Rating:&nbsp;0<center></div>
+        <div class="a" >Total Quizes: 0</div>
+        <div class="a" >Competaive Quizes: 0</div>
+        <div class="a" >Practise Quizes: 0</div>
+        {{/if}}
+      </div>
+      <div class="profilebar">
+        <table>
+           <tr>
+              <td>First Name:</td>
+              <td>{{fname}}</td>
+              <td><i class="fa fa-edit">Edit</i></td>
+           </tr>
+           <tr>
+              <td>Last Name:</td>
+              <td>{{lname}}</td>
+              <td><i class="fa fa-edit">Edit</i></td>
+           </tr>
+           <tr>
+              <td>College:</td>
+              <td>{{college}}</td>
+              <td><i class="fa fa-edit">Edit</i></td>
+           </tr>
+           <tr>
+              <td>Email:</td>
+              <td>{{email}}</td>
+              <td><i class="fa fa-edit">Edit</i></td>
+           </tr>
+      </table>
+      </div>
+    </div>
+  </body>
+</html>

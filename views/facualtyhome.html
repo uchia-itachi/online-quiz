@@ -1,0 +1,40 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" href="/css/facualtyhome.css">
+  </head>
+  <!-- <body style="background-image: url('/images/homebg.jpg');background-size: contain; background-repeat:repeat-x;"> -->
+  <body>
+    {{> header}}
+    <div class="mainbar">
+    <div class="image"></div>
+    <div>
+      <a href="/createquiz" class="links"><i class="fas fa-cogs"></i><br>Create Quiz</a>
+    </div>
+    <div>
+      <a href="competativeresults" class="links"><i class="fas fa-binoculars"></i><br>Competaive Results</a>
+    </div>
+    <div>
+      <a href="collegeresults" class="links"><i class="fas fa-graduation-cap"></i><br>College Results</a>
+    </div>
+      <a href="/deletelist" class="links"><i class="fas fa-trash"></i><br>Delete Quiz</a>
+    </div>
+      <!-- <div class="create-quiz">
+        <div class="links">
+          <a href="" >* Modify Quiz</a>
+        </div>
+      </div> -->
+    </div>
+    <div class="sidebar">
+      <div class="" style="height:7%; width: 100%;  font-size:x-large; margin-left: 5px; ">
+        Students
+      </div>
+      {{#each doc}}
+      <a href="/publicprofile?email={{this.email}}"><span style="color:green;margin-left:30px;">o</span><sapn class="namebox">{{this.fname}} {{this.lname}}</span><br></a>
+      {{/each}}
+    </div>
+  </body>
+</html>

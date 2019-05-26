@@ -1,0 +1,51 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style >
+      .block{
+        padding: 1em;
+        background-color: white;
+        width: 35%;
+        margin: 78px;
+        float: left;
+        box-shadow: -1px 1px 5px #666;
+      }
+    </style>
+  </head>
+  <body>
+    {{> header}}
+    <div class="">
+    {{#each names}}
+      <a href="/deletelist"  id ="{{@key}}"> <div class="block">{{this}}</div></a>
+    {{/each}}
+    </div>
+  </body>
+  <script>
+  var score=0;
+    $(document).ready(function(){
+      {{#each names}}
+      $(document).on('click', '#{{@key}}', function() {
+                            $.ajax({
+                                type: "POST",
+                                url: "deletequiz",
+                                data: "name={{this}}",
+                                success: function (msg) {
+                                  alert(msg);
+
+                            },
+                                error: function (error) {
+                                  console.log(error);
+                                    alert("Error!!");
+                                }
+                            });
+
+            });
+            {{/each}}
+    });
+
+  </script>
+</html>

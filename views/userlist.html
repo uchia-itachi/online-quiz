@@ -1,0 +1,58 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/profilebody.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style >
+      table, th, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    {{> header}}
+      <table style="width:50%; margin-top: 20px; margin-left:auto; margin-right:auto;">
+        <tr>
+          <th>Facualties</th>
+          <th>College</th>
+          <th>email</th>
+        </tr>
+        {{#each doc}}
+        <tr>
+          <td>{{this.fname}} {{this.lname}}</td>
+          <td>{{this.college}}</td>
+          <td>{{this.email}}</td>
+        </tr>
+        {{/each}}
+      </table>
+  </body>
+  <script type="text/javascript">
+    function ajaxfunction(){
+      var name =$("#collegename").val();
+      if(name!=''){
+      $.ajax({
+          type: "POST",
+          url: "addcollege",
+          data: "name="+name,
+          success: function (msg) {
+            alert(msg);
+              location.href="/colleges"
+      },
+          error: function (error) {
+              alert("Error!!");
+          }
+      });
+    }
+    else{
+      alert("plz add College name");
+    }
+  }
+  </script>
+</html>
